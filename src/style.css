@@ -13,6 +13,10 @@
   --sizzling-red: #e84855ff;
 }
 
+body {
+  font-family: 'Oswald', sans-serif;
+}
+
 #content {
   display: grid;
   height: 100vh;
@@ -34,8 +38,15 @@ header {
 
 .logo {
   color: white;
-  font-family: 'Oswald', sans-serif;
   font-size: 2rem;
   font-weight: 600;
 }
 
+footer {
+  background-color: var(--sizzling-red);
+  color: white;
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
