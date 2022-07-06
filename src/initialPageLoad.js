@@ -3,7 +3,7 @@ function createLogo() {
   const logo = document.createElement("div");
   logo.classList.add("logo");
 // set the div's textContent to "Logo"
-  logo.textContent = "Logo";
+  logo.textContent = "Todo List";
 // return the div
   return logo;
 }
