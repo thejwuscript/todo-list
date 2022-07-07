@@ -23,16 +23,7 @@ function createSideBar() {
   const h2 = document.createElement('h2');
   h2.textContent = "Projects";
 
-  const addProject = document.createElement('span');
-  addProject.addEventListener("click", (e) => {
-    addProject.replaceWith(addProjectForm());
-  })
-  const addProjectIcon = new Image();
-  addProjectIcon.src = AddProjectIcon;
-  addProjectIcon.classList.add("sidebar-icon");
-  addProject.append(addProjectIcon, "Add a project...");
-
-  sideBar.append(allTasks, today, line, h2, addProject);
+  sideBar.append(allTasks, today, line, h2, addProjectButton());
   return sideBar;
 }
 
@@ -57,12 +48,28 @@ function addProjectForm() {
   cancelBtn.setAttribute("type", "button");
   cancelBtn.textContent = "Cancel";
 
+  cancelBtn.addEventListener('click', () => {
+    container.replaceWith(addProjectButton());
+  })
   buttons.append(addBtn, cancelBtn);
 
   form.append(textField, buttons);
   container.append(form);
 
   return container;
+}
+
+function addProjectButton() {
+  const addProject = document.createElement('span');
+  addProject.addEventListener("click", (e) => {
+    addProject.replaceWith(addProjectForm());
+  })
+  const addProjectIcon = new Image();
+  addProjectIcon.src = AddProjectIcon;
+  addProjectIcon.classList.add("sidebar-icon");
+  addProject.append(addProjectIcon, "Add a project...");
+
+  return addProject;
 }
 
 export default createSideBar;

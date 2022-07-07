@@ -98,10 +98,14 @@ ul {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
+  flex: auto;
+  max-width: 200px;
 }
 
 .add-project-container {
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-project-form > input,
