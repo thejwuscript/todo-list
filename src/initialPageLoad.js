@@ -1,5 +1,4 @@
-import HouseIcon from './icons/house.png';
-import TodayIcon from './icons/calendar.png';
+import createSideBar from './sidebar';
 
 function createLogo() {
 // create a div with class "logo"
@@ -32,33 +31,6 @@ function createFooter() {
   footer.classList.add("footer");
   footer.appendChild(createCopyrightInfo());
   return footer;
-}
-
-function createSideBar() {
-  const sideBar = document.createElement("div");
-  sideBar.classList.add("sidebar");
-
-  const allTasks = document.createElement('a');
-  allTasks.href = "";
-  const houseIcon = new Image();
-  houseIcon.src = HouseIcon;
-  houseIcon.classList.add("sidebar-icon");
-  allTasks.append(houseIcon, "All Tasks");
-
-  const today = document.createElement('a');
-  today.href = "";
-  const todayIcon = new Image();
-  todayIcon.src = TodayIcon;
-  todayIcon.classList.add("sidebar-icon");
-  today.append(todayIcon, "Today");
-
-  const line = document.createElement("hr");
-
-  const h2 = document.createElement('h2');
-  h2.textContent = "Projects";
-
-  sideBar.append(allTasks, today, line, h2);
-  return sideBar;
 }
 
 function initialPageLoad() {
