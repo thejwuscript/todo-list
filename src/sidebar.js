@@ -1,6 +1,7 @@
 import HouseIcon from './icons/house.png';
 import TodayIcon from './icons/calendar.png';
 import AddProjectIcon from './icons/new-project.png';
+import ExerciseIcon from './icons/warrior.png';
 
 function createSideBar() {
   const sideBar = document.createElement("div");
@@ -23,7 +24,13 @@ function createSideBar() {
   const h2 = document.createElement('h2');
   h2.textContent = "Projects";
 
-  sideBar.append(allTasks, today, line, h2, addProjectButton());
+  const exercise = document.createElement("span");
+  const exerciseIcon = new Image();
+  exerciseIcon.src = ExerciseIcon;
+  exerciseIcon.classList.add("sidebar-icon");
+  exercise.append(exerciseIcon, "Exercise");
+
+  sideBar.append(allTasks, today, line, h2, addProjectButton(), exercise);
   return sideBar;
 }
 
@@ -33,9 +40,11 @@ function addProjectForm() {
 
   const form = document.createElement('form');
   form.classList.add("add-project-form");
+  form.autocomplete = "off";
 
   const textField = document.createElement('input');
   textField.setAttribute("type", "text");
+  textField.id = "new-project-title"
 
   const buttons = document.createElement('div');
   buttons.classList.add("add-project-form-buttons");
@@ -44,10 +53,20 @@ function addProjectForm() {
   addBtn.setAttribute("type", "button");
   addBtn.textContent = "Add";
 
+  addBtn.addEventListener("click", (e) => {
+    const title = document.getElementById("new-project-title").value;
+    const newSpan = document.createElement('span');
+    newSpan.textContent = title;
+    container.insertAdjacentElement("afterend", newSpan)
+    container.replaceWith(addProjectButton());
+  })
+
+  form.addEventListener("keydown", (e) => e.key === "Enter" ? addBtn.click() : "" )
+
+
   const cancelBtn = document.createElement('button');
   cancelBtn.setAttribute("type", "button");
   cancelBtn.textContent = "Cancel";
-
   cancelBtn.addEventListener('click', () => {
     container.replaceWith(addProjectButton());
   })
@@ -63,6 +82,7 @@ function addProjectButton() {
   const addProject = document.createElement('span');
   addProject.addEventListener("click", (e) => {
     addProject.replaceWith(addProjectForm());
+    document.getElementById("new-project-title").focus();
   })
   const addProjectIcon = new Image();
   addProjectIcon.src = AddProjectIcon;
