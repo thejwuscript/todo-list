@@ -18,6 +18,10 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+p {
+  margin: 0;
+}
+
 #content {
   display: grid;
   height: 100vh;
@@ -44,7 +48,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   padding: 48px;
-  gap: 12px;
+  gap: 16px;
 }
 
 main > button {
@@ -167,4 +171,18 @@ main hr {
 
 div > button {
   flex: 1;
+}
+
+.task-container {
+  width: 70%;
+  min-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 1.5rem;
+}
+
+.task-title {
+  flex: auto;
 }

@@ -1,5 +1,6 @@
 import Task from './Task';
 import displayTask from './displayTask';
+import { format } from 'date-fns';
 
 function taskForm(task) {
   const formContainer = document.createElement("div");
@@ -15,13 +16,14 @@ function taskForm(task) {
   title.name = "task_title";
   title.placeholder = "Title";
   title.required = true;
+  title.minLength = "5";
 
   const dueDate = document.createElement("input");
   dueDate.type = "date";
   dueDate.id = "duedate";
   dueDate.name = "due_date";
-  dueDate.min = new Date().toLocaleString().split(',')[0];
-  dueDate.setAttribute("max", "1/1/3001");
+  dueDate.min = format(new Date(), "yyyy-MM-dd");
+  dueDate.max = "3001-01-01";
 
   const priority = document.createElement("select");
   priority.name = "priority";
@@ -57,12 +59,10 @@ function taskForm(task) {
   const buttonsContainer = document.createElement("div");
 
   const addBtn = document.createElement("button");
-  addBtn.type = "button";
+  addBtn.type = "submit";
   addBtn.textContent = "Add";
-  // add an event listener to create a task object
-  addBtn.addEventListener('click', () => {
+  form.addEventListener('submit', (e) => {
     const newTask = Task(title.value, description.value, dueDate.value, priority.value);
-    // Display newTask...but need to convert it to an element
     document.querySelector('.main').appendChild(displayTask(newTask));
     formContainer.remove();
   })
