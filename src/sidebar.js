@@ -2,12 +2,14 @@ import HouseIcon from './icons/house.png';
 import TodayIcon from './icons/calendar.png';
 import AddProjectIcon from './icons/new-project.png';
 import ExerciseIcon from './icons/warrior.png';
+import { loadAllTasksPage } from './allTasks';
 
 function createSideBar() {
   const sideBar = document.createElement("div");
   sideBar.classList.add("sidebar");
 
   const allTasks = document.createElement('span');
+  allTasks.addEventListener("click", loadAllTasksPage)
   const houseIcon = new Image();
   houseIcon.src = HouseIcon;
   houseIcon.classList.add("sidebar-icon");
@@ -44,7 +46,7 @@ function addProjectForm() {
 
   const textField = document.createElement('input');
   textField.setAttribute("type", "text");
-  textField.id = "new-project-title"
+  textField.id = "new-project-title";
 
   const buttons = document.createElement('div');
   buttons.classList.add("add-project-form-buttons");
@@ -55,10 +57,14 @@ function addProjectForm() {
 
   addBtn.addEventListener("click", (e) => {
     const title = document.getElementById("new-project-title").value;
-    const newSpan = document.createElement('span');
-    newSpan.textContent = title;
-    container.insertAdjacentElement("afterend", newSpan)
-    container.replaceWith(addProjectButton());
+    if (title == '') {
+      return
+    } else {
+      const newSpan = document.createElement('span');
+      newSpan.textContent = title;
+      container.insertAdjacentElement("afterend", newSpan);
+      container.replaceWith(addProjectButton());
+    }
   })
 
   form.addEventListener("keydown", (e) => e.key === "Enter" ? addBtn.click() : "" )

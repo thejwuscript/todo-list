@@ -33,6 +33,12 @@ function createFooter() {
   return footer;
 }
 
+function createMain() {
+  const main = document.createElement("main");
+  main.classList.add("main");
+  return main;
+}
+
 function initialPageLoad() {
 // get the div element with id "content"
   const content = document.getElementById("content");
@@ -40,6 +46,7 @@ function initialPageLoad() {
   content.appendChild(createHeader());
   content.appendChild(createFooter());
   content.appendChild(createSideBar());
+  content.appendChild(createMain());
 // return the div
   return content;
 }

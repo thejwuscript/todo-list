@@ -37,6 +37,20 @@ header {
   justify-content: center;
 }
 
+main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 48px;
+  gap: 12px;
+}
+
+main > button {
+  align-self: flex-start;
+}
+
 .sidebar h2 {
   margin: -16px 0 0 0;
   text-align: center;
@@ -91,6 +105,11 @@ ul {
   border: 1px solid var(--space-cadet);
 }
 
+main hr {
+  width: 100%;
+  border: 1px solid var(--space-cadet);
+}
+
 .add-project-form {
   display: flex;
   flex-direction: column;
@@ -122,5 +141,30 @@ ul {
 }
 
 .add-project-form-buttons button {
+  flex: 1;
+}
+
+.new-task-container {
+  background-color: var(--light-gray);
+  padding: 10px;
+  width: 500px;
+}
+
+.new-task-container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.new-task-container > form > div {
+  display: flex;
+  flex-direction: row;
+}
+
+#tasktitle {
+  flex: auto;
+}
+
+div > button {
   flex: 1;
 }
