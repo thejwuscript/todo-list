@@ -1,4 +1,4 @@
-import Task from './Task';
+import {Task} from './Task';
 import displayTask from './displayTask';
 import { format } from 'date-fns';
 import saveTasks from './saveTasks';

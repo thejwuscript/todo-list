@@ -1,6 +1,6 @@
 import { format, parse } from 'date-fns';
 import saveTasks from './saveTasks';
-import Task from './Task';
+import {Task} from './Task';
 import taskForm from './taskForm';
 
 function displayTask(taskObject) {

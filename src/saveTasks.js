@@ -1,4 +1,4 @@
-import Task from './Task';
+import {Task} from './Task';
 
 function saveTasks() {
   let array = Task.all.map( obj => ({

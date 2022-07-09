@@ -3,6 +3,7 @@ import TodayIcon from './icons/calendar.png';
 import AddProjectIcon from './icons/new-project.png';
 import ExerciseIcon from './icons/warrior.png';
 import { loadAllTasksPage } from './allTasks';
+import loadTodaysTasksPage from './todaysTasks';
 
 function createSideBar() {
   const sideBar = document.createElement("div");
@@ -20,6 +21,8 @@ function createSideBar() {
   todayIcon.src = TodayIcon;
   todayIcon.classList.add("sidebar-icon");
   today.append(todayIcon, "Today");
+  today.addEventListener('click', loadTodaysTasksPage);
+
 
   const line = document.createElement("hr");
 

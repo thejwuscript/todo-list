@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 function Task(title, description, dueDate, priority) {
   if (Task.idCounter === undefined) {
     Task.idCounter = 1;
@@ -30,4 +32,17 @@ function pushTask(taskObj) {
   Task.all.push(taskObj);
 }
 
-export default Task;
+function todaysTasks() {
+  // return all tasks that are due today in an array
+
+
+  // to get date from a task object...object.getDueDate(). String. "yyyy-MM-dd"
+  // get today's date object
+  const today = new Date();
+  // format today's date object into a string "yyyy-MM-dd"
+  const todayString = format(today, "yyyy-MM-dd");
+  // filter the tasks that matches the above string --> return the array 
+  return Task.all.filter( task => task.getDueDate() === todayString);
+}
+
+export { Task, todaysTasks };
