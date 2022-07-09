@@ -198,3 +198,9 @@ div > button {
 .task-title {
   flex: auto;
 }
+
+.task-description {
+  width: 100%;
+  margin-left: 32px;
+  font-size: 1rem;
+}
