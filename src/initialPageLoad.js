@@ -1,3 +1,4 @@
+import { loadAllTasksPage } from './allTasks';
 import createSideBar from './sidebar';
 
 function createLogo() {
@@ -47,6 +48,7 @@ function initialPageLoad() {
   content.appendChild(createFooter());
   content.appendChild(createSideBar());
   content.appendChild(createMain());
+  loadAllTasksPage();
 // return the div
   return content;
 }
