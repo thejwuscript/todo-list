@@ -1,5 +1,6 @@
 import { loadAllTasksPage } from './allTasks';
 import createSideBar from './sidebar';
+import loadTasks from './loadTask';
 
 function createLogo() {
 // create a div with class "logo"
@@ -41,15 +42,16 @@ function createMain() {
 }
 
 function initialPageLoad() {
-// get the div element with id "content"
   const content = document.getElementById("content");
-// append header, footer, sidebar, main to the above div
+
   content.appendChild(createHeader());
   content.appendChild(createFooter());
   content.appendChild(createSideBar());
   content.appendChild(createMain());
+  
+  loadTasks();
   loadAllTasksPage();
-// return the div
+
   return content;
 }
 

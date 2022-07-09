@@ -24,7 +24,6 @@ function displayTask(taskObject) {
   editBtn.classList.add("edit-button");
   editBtn.textContent = "Edit";
   editBtn.addEventListener('click', () => {
-    // Replace the task container with a task form.
     container.replaceWith(taskForm(taskObject));
   })
   
