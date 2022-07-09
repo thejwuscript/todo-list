@@ -214,3 +214,8 @@ main hr {
 .task-container:hover .delete-button {
   visibility: visible;
 }
+
+.sidebar .active {
+  background-color: var(--persian-green);
+  color: white;
+}

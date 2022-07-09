@@ -14,7 +14,9 @@ function createSideBar() {
   const houseIcon = new Image();
   houseIcon.src = HouseIcon;
   houseIcon.classList.add("sidebar-icon");
+  allTasks.addEventListener('click', () => setActiveElement(allTasks));
   allTasks.append(houseIcon, "All Tasks");
+
 
   const today = document.createElement('span');
   const todayIcon = new Image();
@@ -22,6 +24,7 @@ function createSideBar() {
   todayIcon.classList.add("sidebar-icon");
   today.append(todayIcon, "Today");
   today.addEventListener('click', loadTodaysTasksPage);
+  today.addEventListener('click', () => setActiveElement(today))
 
 
   const line = document.createElement("hr");
@@ -33,6 +36,7 @@ function createSideBar() {
   const exerciseIcon = new Image();
   exerciseIcon.src = ExerciseIcon;
   exerciseIcon.classList.add("sidebar-icon");
+  exercise.addEventListener('click', () => setActiveElement(exercise))
   exercise.append(exerciseIcon, "Exercise");
 
   sideBar.append(allTasks, today, line, h2, addProjectButton(), exercise);
@@ -99,6 +103,12 @@ function addProjectButton() {
   addProject.append(addProjectIcon, "Add a project...");
 
   return addProject;
+}
+
+function setActiveElement(element) {
+  const sideMenus = document.querySelectorAll(".sidebar span");
+  sideMenus.forEach( menu => menu.classList.remove('active'));
+  element.classList.add('active');
 }
 
 export default createSideBar;
