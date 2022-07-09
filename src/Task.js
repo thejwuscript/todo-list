@@ -9,8 +9,14 @@ function Task(title, description, dueDate, priority) {
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
   const getId = () => id;
+
+  const setTitle = newTitle => title = newTitle;
+  const setDescription = newDescription => description = newDescription;
+  const setDueDate = newDueDate => dueDate = newDueDate;
+  const setPriority = newPriority => priority = newPriority;
+
   
-  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority};
+  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, setTitle, setDescription, setDueDate, setPriority};
   pushTask(newTask);
   Task.idCounter += 1;
 

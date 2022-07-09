@@ -1,4 +1,7 @@
 import { format, parse } from 'date-fns';
+import saveTasks from './saveTasks';
+import Task from './Task';
+import taskForm from './taskForm';
 
 function displayTask(taskObject) {
   const container = document.createElement('div');
@@ -20,11 +23,20 @@ function displayTask(taskObject) {
   editBtn.type = "button";
   editBtn.classList.add("edit-button");
   editBtn.textContent = "Edit";
+  editBtn.addEventListener('click', () => {
+    // Replace the task container with a task form.
+    container.replaceWith(taskForm(taskObject));
+  })
   
   const delBtn = document.createElement('button');
   delBtn.type = "button";
   delBtn.classList.add("delete-button");
   delBtn.textContent = "Delete";
+  delBtn.addEventListener('click', () => {
+    Task.all.splice(Task.all.indexOf(taskObject), 1);
+    saveTasks();
+    container.remove();
+  })
 
 
   const description = document.createElement('p');

@@ -1,8 +1,7 @@
 import Task from './Task';
 import displayTask from './displayTask';
 import { format } from 'date-fns';
-import saveTask from './saveTask';
-import saveTasks from './saveTask';
+import saveTasks from './saveTasks';
 
 function taskForm(task) {
   const formContainer = document.createElement("div");
@@ -19,6 +18,7 @@ function taskForm(task) {
   title.placeholder = "Title";
   title.required = true;
   title.minLength = "5";
+  title.value = task ? task.getTitle() : "";
 
   const dueDate = document.createElement("input");
   dueDate.type = "date";
@@ -26,16 +26,17 @@ function taskForm(task) {
   dueDate.name = "due_date";
   dueDate.min = format(new Date(), "yyyy-MM-dd");
   dueDate.max = "3001-01-01";
+  dueDate.value = task ? task.getDueDate() : "";
 
   const priority = document.createElement("select");
   priority.name = "priority";
 
-  const datePlaceholder = document.createElement("option");
-  datePlaceholder.value = "";
-  datePlaceholder.disabled = true;
-  datePlaceholder.selected = true;
-  datePlaceholder.hidden = true;
-  datePlaceholder.textContent = "Priority";
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.disabled = true;
+  placeholder.selected = true;
+  placeholder.hidden = true;
+  placeholder.textContent = "Priority";
 
   const none = document.createElement("option");
   none.value = "none";
@@ -49,7 +50,12 @@ function taskForm(task) {
   low.value = "low";
   low.textContent = "Low";
 
-  priority.append(datePlaceholder, none, high, low)
+  if (task && task.getPriority()) {
+    const priorityValue = [none, high, low].filter( elem => elem.value === task.getPriority())
+    priorityValue[0].selected = true;
+  }
+
+  priority.append(placeholder, none, high, low)
   topDiv.append(title, dueDate, priority);
   
   const description = document.createElement("input");
@@ -57,25 +63,42 @@ function taskForm(task) {
   description.id = "description";
   description.name = "description";
   description.placeholder = "Description";
+  description.value = task ? task.getDescription() : "";
 
   const buttonsContainer = document.createElement("div");
   buttonsContainer.classList.add("buttons");
 
   const addBtn = document.createElement("button");
   addBtn.type = "submit";
-  addBtn.textContent = "Add";
+  addBtn.textContent = task ? "Update" : "Add";
+
+
   form.addEventListener('submit', (e) => {
-    const newTask = Task(title.value, description.value, dueDate.value, priority.value);
-    document.querySelector('.main').appendChild(displayTask(newTask));
-    saveTasks();
-    formContainer.remove();
+    if (task) {
+      task.setTitle(title.value);
+      task.setDueDate(dueDate.value);
+      task.setPriority(priority.value);
+      task.setDescription(description.value);
+      saveTasks();
+      formContainer.replaceWith(displayTask(task));
+    } else {
+      const newTask = Task(title.value, description.value, dueDate.value, priority.value);
+      document.querySelector('.main').appendChild(displayTask(newTask));
+      saveTasks();
+      formContainer.remove();
+    }
   })
   
-
   const cancelBtn = document.createElement("button");
   cancelBtn.type = "button";
   cancelBtn.textContent = "Cancel";
-  cancelBtn.addEventListener('click', () => formContainer.remove());
+  cancelBtn.addEventListener('click', () => {
+    if (task) {
+      formContainer.replaceWith(displayTask(task))
+    } else {
+      formContainer.remove();
+    };
+  });
 
   buttonsContainer.append(addBtn, cancelBtn);
 
