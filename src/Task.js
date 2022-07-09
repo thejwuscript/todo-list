@@ -1,15 +1,18 @@
 function Task(title, description, dueDate, priority) {
+  if (Task.idCounter === undefined) {
+    Task.idCounter = 0;
+  }
+  const id = Task.idCounter;
+  
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
+  const getId = () => id;
   
-  const newTask = {getTitle, getDescription, getDueDate, getPriority}
+  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority};
 
-  if (Task.all === undefined) {
-    Task.all = new Array();
-  };
-  Task.all.push(newTask);
+  Task.idCounter += 1;
 
   return newTask;
 }
