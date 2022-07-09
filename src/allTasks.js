@@ -13,7 +13,6 @@ function loadAllTasksPage() {
   Task.all.forEach(taskobj => {
     main.appendChild(displayTask(taskobj));
   });
-// call the localStorage and any that is made in the current session 
 }
 
 
