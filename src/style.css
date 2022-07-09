@@ -169,7 +169,7 @@ main hr {
   flex: auto;
 }
 
-div > button {
+.buttons > button {
   flex: 1;
 }
 
@@ -203,4 +203,14 @@ div > button {
   width: 100%;
   margin-left: 32px;
   font-size: 1rem;
+}
+
+.edit-button,
+.delete-button {
+  visibility: hidden;
+}
+
+.task-container:hover .edit-button,
+.task-container:hover .delete-button {
+  visibility: visible;
 }

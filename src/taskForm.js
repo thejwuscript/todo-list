@@ -59,6 +59,7 @@ function taskForm(task) {
   description.placeholder = "Description";
 
   const buttonsContainer = document.createElement("div");
+  buttonsContainer.classList.add("buttons");
 
   const addBtn = document.createElement("button");
   addBtn.type = "submit";
