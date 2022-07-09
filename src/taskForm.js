@@ -1,6 +1,8 @@
 import Task from './Task';
 import displayTask from './displayTask';
 import { format } from 'date-fns';
+import saveTask from './saveTask';
+import saveTasks from './saveTask';
 
 function taskForm(task) {
   const formContainer = document.createElement("div");
@@ -64,6 +66,7 @@ function taskForm(task) {
   form.addEventListener('submit', (e) => {
     const newTask = Task(title.value, description.value, dueDate.value, priority.value);
     document.querySelector('.main').appendChild(displayTask(newTask));
+    saveTasks();
     formContainer.remove();
   })
   
