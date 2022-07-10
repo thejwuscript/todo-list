@@ -235,3 +235,17 @@ main hr {
 .task-container.completed .delete-button {
   visibility: hidden;
 }
+
+.project > .delete-project-button {
+  visibility: hidden;
+  position: absolute;
+  right: 4px;
+}
+
+.project:hover > .delete-project-button {
+  visibility: visible;
+}
+
+.sidebar .project {
+  position: relative;
+}

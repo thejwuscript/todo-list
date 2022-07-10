@@ -72,11 +72,14 @@ function taskForm(task) {
   addBtn.type = "submit";
   addBtn.textContent = task ? "Update" : "Add";
 
-  const project = document.createElement("input");
-  project.type = "text";
-  //project.textContent = Whichever sidebar span's textNode has the class of "active" (i.e. the project that's currently selected)
-
-
+  const project = document.createElement("p");
+  project.style.display = "none";
+  if (document.querySelector(".sidebar span.project.active")) {
+    project.textContent = document.querySelector(".sidebar span.project.active").firstChild.textContent;
+  } else {
+    project.textContent = "";
+  }
+  
   form.addEventListener('submit', (e) => {
     if (task) {
       task.setTitle(title.value);
@@ -86,7 +89,7 @@ function taskForm(task) {
       saveTasks();
       formContainer.replaceWith(displayTask(task));
     } else {
-      const newTask = Task(title.value, description.value, dueDate.value, priority.value);
+      const newTask = Task(title.value, description.value, dueDate.value, priority.value, project.textContent);
       document.querySelector('.main').appendChild(displayTask(newTask));
       saveTasks();
       formContainer.remove();
@@ -106,7 +109,7 @@ function taskForm(task) {
 
   buttonsContainer.append(addBtn, cancelBtn);
 
-  form.append(topDiv, description, buttonsContainer);
+  form.append(topDiv, description, buttonsContainer, project);
   formContainer.appendChild(form);
 
   return formContainer;

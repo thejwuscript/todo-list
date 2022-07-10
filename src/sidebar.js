@@ -5,12 +5,15 @@ import ExerciseIcon from './icons/warrior.png';
 import { loadAllTasksPage } from './allTasks';
 import loadTodaysTasksPage from './todaysTasks';
 import {Project} from './Project';
+import { loadProjectPage } from './loadProjectPage';
+import saveProjects from './saveProjects';
 
 function createSideBar() {
   const sideBar = document.createElement("div");
   sideBar.classList.add("sidebar");
 
   const allTasks = document.createElement('span');
+  allTasks.classList.add("active");
   allTasks.addEventListener("click", loadAllTasksPage)
   const houseIcon = new Image();
   houseIcon.src = HouseIcon;
@@ -35,18 +38,32 @@ function createSideBar() {
 
   const projectNodes = Project.all.map(project => {
     const projectSpan = document.createElement("span");
+    const delProject = document.createElement("span");
+    delProject.classList.add("delete-project-button");
+    delProject.textContent = "X";
+    delProject.addEventListener('click', () => {
+      //if (confirm("Are you sure you want to delete this project?") == true) {
+      //  project.destroy();
+      //  projectSpan.remove();
+     // }
+    })
+    projectSpan.classList.add('project');
+
     if (project.getTitle() === "Exercise") {
       const exerciseIcon = new Image();
       exerciseIcon.src = ExerciseIcon;
       exerciseIcon.classList.add("sidebar-icon");
       projectSpan.addEventListener('click', () => setActiveElement(projectSpan))
-      projectSpan.append(exerciseIcon, project.getTitle());
+      projectSpan.addEventListener('click', () => loadProjectPage(project.getTitle()))
+      projectSpan.append(exerciseIcon, project.getTitle(), delProject);
     } else {
-      projectSpan.textContent = project.getTitle();
       projectSpan.addEventListener('click', () => setActiveElement(projectSpan));
+      projectSpan.addEventListener('click', () => loadProjectPage(project.getTitle()));
+      projectSpan.append(project.getTitle(), delProject);
     };
     return projectSpan;
   })
+
   sideBar.append(allTasks, today, line, h2, addProjectButton(), ...projectNodes);
 
   return sideBar;
@@ -81,7 +98,10 @@ function addProjectForm() {
       saveProjects();
       const newSpan = document.createElement('span');
       newSpan.textContent = title;
-      container.insertAdjacentElement("afterend", newSpan);
+      newSpan.classList.add('project');
+      newSpan.addEventListener('click', () => setActiveElement(newSpan));
+      newSpan.addEventListener('click', () => loadProjectPage(title));
+      document.querySelector('.sidebar').append(newSpan);
       container.replaceWith(addProjectButton());
     }
   })

@@ -1,18 +1,19 @@
+import { Task } from "./Task";
 import displayTask from "./displayTask";
 import newTaskButton from "./newTaskButton";
-import { Task } from "./Task";
 
-function loadAllTasksPage() {
+
+function loadProjectPage(projectTitle) {
   const main = document.querySelector('main');
   main.textContent = "";
   main.appendChild(newTaskButton());
   main.appendChild(document.createElement('hr'));
-  
+
   if (Task.all) {
-    Task.all.forEach(taskobj => main.appendChild(displayTask(taskobj)));
+    const tasks = Task.all.filter(task => task.getProject() === projectTitle);
+    tasks.forEach(task => main.appendChild(displayTask(task)));
   }
+
 }
 
-
-
-export { loadAllTasksPage };
+export { loadProjectPage };
