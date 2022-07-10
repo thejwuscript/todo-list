@@ -34,9 +34,11 @@ function pushTask(taskObj) {
 }
 
 function todaysTasks() {
-  const today = new Date();
-  const todayString = format(today, "yyyy-MM-dd");
-  return Task.all.filter( task => task.getDueDate() === todayString);
+  if (Task.all) {
+    const today = new Date();
+    const todayString = format(today, "yyyy-MM-dd");
+    return Task.all.filter( task => task.getDueDate() === todayString);
+  }
 }
 
 export { Task, todaysTasks };

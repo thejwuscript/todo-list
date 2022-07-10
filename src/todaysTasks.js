@@ -8,7 +8,9 @@ function loadTodaysTasksPage() {
 
   main.appendChild(newTaskButton());
   main.appendChild(document.createElement('hr'));
-  todaysTasks().forEach( task => main.appendChild(displayTask(task)));
+  if (todaysTasks()) {
+    todaysTasks().forEach( task => main.appendChild(displayTask(task)));
+  }
 };
 
 export default loadTodaysTasksPage
