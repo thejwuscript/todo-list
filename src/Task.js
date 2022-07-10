@@ -19,8 +19,6 @@ function Task(title, description, dueDate, priority, project) {
   const setPriority = newPriority => priority = newPriority;
   const setProject = newProject => project = newProject;
 
-  debugger;
-  
   const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, getProject, setTitle, setDescription, setDueDate, setPriority, setProject};
   pushTask(newTask);
   Task.idCounter += 1;

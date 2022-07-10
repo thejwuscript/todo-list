@@ -41,11 +41,13 @@ function createSideBar() {
     const delProject = document.createElement("span");
     delProject.classList.add("delete-project-button");
     delProject.textContent = "X";
-    delProject.addEventListener('click', () => {
-      //if (confirm("Are you sure you want to delete this project?") == true) {
-      //  project.destroy();
-      //  projectSpan.remove();
-     // }
+    delProject.addEventListener('click', (e) => {
+      e.stopPropagation();
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      project.destroy(project);
+      projectSpan.remove();
+      loadAllTasksPage();
+    };
     })
     projectSpan.classList.add('project');
 
@@ -94,10 +96,20 @@ function addProjectForm() {
       return
     } else {
       const newProject = Project(title);
-      // Update saved project to local storage
       saveProjects();
       const newSpan = document.createElement('span');
-      newSpan.textContent = title;
+      const delButton = document.createElement('span');
+      delButton.classList.add("delete-project-button");
+      delButton.textContent = "X";
+      delButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.confirm("Are you sure you want to delete this project?")) {
+          newProject.destroy();
+          newSpan.remove();
+          loadAllTasksPage();
+        }
+      });
+      newSpan.append(newProject.getTitle(), delButton);
       newSpan.classList.add('project');
       newSpan.addEventListener('click', () => setActiveElement(newSpan));
       newSpan.addEventListener('click', () => loadProjectPage(title));

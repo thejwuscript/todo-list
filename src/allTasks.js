@@ -7,6 +7,7 @@ function loadAllTasksPage() {
   main.textContent = "";
   main.appendChild(newTaskButton());
   main.appendChild(document.createElement('hr'));
+  document.querySelector('.sidebar').firstChild.classList.add('active');
   
   if (Task.all) {
     Task.all.forEach(taskobj => main.appendChild(displayTask(taskobj)));

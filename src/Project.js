@@ -1,13 +1,19 @@
 import saveProjects from "./saveProjects";
+import { Task } from "./Task";
+import saveTasks from "./saveTasks";
 
 function Project(title) {
   const getTitle = () => title;
 
-  const destroy = () => {
+  const destroy = function() {
     Project.all.splice(Project.all.indexOf(this), 1);
     saveProjects();
-    Task.all = Task.all.filter(task => task.getProject() !== this.title);
-    saveTasks();
+
+    if (Task.all) {
+      Task.all = Task.all.filter(task => task.getProject() !== title);
+      saveTasks();
+    }
+   
   };
 
   const project = {getTitle, destroy}
