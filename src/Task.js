@@ -1,11 +1,10 @@
 import { format } from 'date-fns';
 
-function Task(title, description, dueDate, priority, project) {
+function Task(title, description, dueDate, priority, project, completed = false) {
   if (Task.idCounter === undefined) {
     Task.idCounter = 1;
   }
   const id = Task.idCounter;
-  let completed = false;
   
   const getTitle = () => title;
   const getDescription = () => description;

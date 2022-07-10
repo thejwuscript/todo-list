@@ -13,9 +13,11 @@ function displayTask(taskObject) {
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
       taskObject.completed = true;
+      saveTasks();
       completedTask(container);
     } else {
       taskObject.completed = false;
+      saveTasks();
       container.querySelector('hr.strikethrough').remove();
       container.classList.remove('completed');
       title.addEventListener('click', toggleDescriptionVisibility);
@@ -56,6 +58,7 @@ function displayTask(taskObject) {
   description.hidden = true;
 
   if (taskObject.completed) {
+    checkbox.checked = true;
     completedTask(container);
   }
 

@@ -6,7 +6,8 @@ function saveTasks() {
     dueDate: obj.getDueDate(),
     priority: obj.getPriority(),
     description: obj.getDescription(),
-    project: obj.getProject()
+    project: obj.getProject(),
+    completed: obj.completed
   }));
   localStorage.setItem("tasks", JSON.stringify(array))
 }
