@@ -12,8 +12,10 @@ function displayTask(taskObject) {
   checkbox.type = "checkbox";
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
+      taskObject.completed = true;
       completedTask(container);
     } else {
+      taskObject.completed = false;
       container.querySelector('hr.strikethrough').remove();
       container.classList.remove('completed');
       title.addEventListener('click', toggleDescriptionVisibility);
@@ -48,11 +50,14 @@ function displayTask(taskObject) {
     container.remove();
   })
 
-
   const description = document.createElement('p');
   description.classList.add('task-description');
   description.textContent = taskObject.getDescription();
   description.hidden = true;
+
+  if (taskObject.completed) {
+    completedTask(container);
+  }
 
   container.append(checkbox, title, dueDate, editBtn, delBtn, description)
 
@@ -66,7 +71,9 @@ function completedTask(container) {
   strike.classList.add("strikethrough");
   container.appendChild(strike);
   // Remove event listener that toggles visibility of description
-  container.querySelector('p.task-title').removeEventListener('click', toggleDescriptionVisibility);
+  if (container.querySelector('p.task-title')) {
+    container.querySelector('p.task-title').removeEventListener('click', toggleDescriptionVisibility);
+  }
 }
 
 function toggleDescriptionVisibility(event) {

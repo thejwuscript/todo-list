@@ -5,6 +5,7 @@ function Task(title, description, dueDate, priority, project) {
     Task.idCounter = 1;
   }
   const id = Task.idCounter;
+  let completed = false;
   
   const getTitle = () => title;
   const getDescription = () => description;
@@ -19,7 +20,7 @@ function Task(title, description, dueDate, priority, project) {
   const setPriority = newPriority => priority = newPriority;
   const setProject = newProject => project = newProject;
 
-  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, getProject, setTitle, setDescription, setDueDate, setPriority, setProject};
+  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, getProject, setTitle, setDescription, setDueDate, setPriority, setProject, completed};
   pushTask(newTask);
   Task.idCounter += 1;
 
