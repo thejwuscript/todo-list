@@ -4,6 +4,7 @@ import AddProjectIcon from './icons/new-project.png';
 import ExerciseIcon from './icons/warrior.png';
 import { loadAllTasksPage } from './allTasks';
 import loadTodaysTasksPage from './todaysTasks';
+import {Project} from './Project';
 
 function createSideBar() {
   const sideBar = document.createElement("div");
@@ -32,14 +33,22 @@ function createSideBar() {
   const h2 = document.createElement('h2');
   h2.textContent = "Projects";
 
-  const exercise = document.createElement("span");
-  const exerciseIcon = new Image();
-  exerciseIcon.src = ExerciseIcon;
-  exerciseIcon.classList.add("sidebar-icon");
-  exercise.addEventListener('click', () => setActiveElement(exercise))
-  exercise.append(exerciseIcon, "Exercise");
+  const projectNodes = Project.all.map(project => {
+    const projectSpan = document.createElement("span");
+    if (project.getTitle() === "Exercise") {
+      const exerciseIcon = new Image();
+      exerciseIcon.src = ExerciseIcon;
+      exerciseIcon.classList.add("sidebar-icon");
+      projectSpan.addEventListener('click', () => setActiveElement(projectSpan))
+      projectSpan.append(exerciseIcon, project.getTitle());
+    } else {
+      projectSpan.textContent = project.getTitle();
+      projectSpan.addEventListener('click', () => setActiveElement(projectSpan));
+    };
+    return projectSpan;
+  })
+  sideBar.append(allTasks, today, line, h2, addProjectButton(), ...projectNodes);
 
-  sideBar.append(allTasks, today, line, h2, addProjectButton(), exercise);
   return sideBar;
 }
 
@@ -67,6 +76,9 @@ function addProjectForm() {
     if (title == '') {
       return
     } else {
+      const newProject = Project(title);
+      // Update saved project to local storage
+      saveProjects();
       const newSpan = document.createElement('span');
       newSpan.textContent = title;
       container.insertAdjacentElement("afterend", newSpan);

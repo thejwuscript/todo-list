@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 
-function Task(title, description, dueDate, priority) {
+function Task(title, description, dueDate, priority, project) {
   if (Task.idCounter === undefined) {
     Task.idCounter = 1;
   }
@@ -11,14 +11,16 @@ function Task(title, description, dueDate, priority) {
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
   const getId = () => id;
+  const getProject = () => project;
 
   const setTitle = newTitle => title = newTitle;
   const setDescription = newDescription => description = newDescription;
   const setDueDate = newDueDate => dueDate = newDueDate;
   const setPriority = newPriority => priority = newPriority;
+  const setProject = newProject => project = newProject;
 
   
-  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, setTitle, setDescription, setDueDate, setPriority};
+  const newTask = {getId, getTitle, getDescription, getDueDate, getPriority, getProject, setTitle, setDescription, setDueDate, setPriority, setProject};
   pushTask(newTask);
   Task.idCounter += 1;
 

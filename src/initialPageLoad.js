@@ -1,6 +1,8 @@
 import { loadAllTasksPage } from './allTasks';
 import createSideBar from './sidebar';
 import loadTasks from './loadTask';
+import { Project } from './Project';
+import loadProjects from './loadProjects';
 
 function createLogo() {
 // create a div with class "logo"
@@ -42,6 +44,7 @@ function createMain() {
 }
 
 function initialPageLoad() {
+  loadProjects();
   const content = document.getElementById("content");
 
   content.appendChild(createHeader());
@@ -51,7 +54,7 @@ function initialPageLoad() {
   
   loadTasks();
   loadAllTasksPage();
-
+  
   return content;
 }
 

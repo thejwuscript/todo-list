@@ -72,6 +72,10 @@ function taskForm(task) {
   addBtn.type = "submit";
   addBtn.textContent = task ? "Update" : "Add";
 
+  const project = document.createElement("input");
+  project.type = "text";
+  //project.textContent = Whichever sidebar span's textNode has the class of "active" (i.e. the project that's currently selected)
+
 
   form.addEventListener('submit', (e) => {
     if (task) {
