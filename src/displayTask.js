@@ -12,18 +12,18 @@ function displayTask(taskObject) {
   checkbox.type = "checkbox";
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
-      const strike = document.createElement('hr')
-      strike.classList.add("strikethrough");
-      container.appendChild(strike);
+      completedTask(container);
     } else {
-      
+      container.querySelector('hr.strikethrough').remove();
+      container.classList.remove('completed');
+      title.addEventListener('click', toggleDescriptionVisibility);
     }
   })
 
   const title = document.createElement('p');
   title.classList.add('task-title');
   title.textContent = taskObject.getTitle();
-  title.addEventListener('click', () => description.toggleAttribute('hidden'))
+  title.addEventListener('click', toggleDescriptionVisibility);
 
   const dueDate = document.createElement('p');
   dueDate.classList.add('task-date');
@@ -58,5 +58,20 @@ function displayTask(taskObject) {
 
   return container;
 };
+
+function completedTask(container) {
+  // Add a class to the container to indicate it's completed
+  container.classList.add('completed');
+  const strike = document.createElement('hr')
+  strike.classList.add("strikethrough");
+  container.appendChild(strike);
+  // Remove event listener that toggles visibility of description
+  container.querySelector('p.task-title').removeEventListener('click', toggleDescriptionVisibility);
+}
+
+function toggleDescriptionVisibility(event) {
+  const description = event.target.parentNode.querySelector('.task-description');
+  description.toggleAttribute('hidden');
+}
 
 export default displayTask;

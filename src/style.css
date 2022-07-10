@@ -225,3 +225,13 @@ main hr {
   left: 36px;
   width: calc(100% - 190px);
 }
+
+.task-container.completed {
+  background-color: var(--light-gray);
+  color: darkgray;
+}
+
+.task-container.completed .edit-button,
+.task-container.completed .delete-button {
+  visibility: hidden;
+}
