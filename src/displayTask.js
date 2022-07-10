@@ -6,13 +6,24 @@ import taskForm from './taskForm';
 function displayTask(taskObject) {
   const container = document.createElement('div');
   container.classList.add("task-container");
+  container.style.position = "relative";
 
   const checkbox = document.createElement('input');
   checkbox.type = "checkbox";
+  checkbox.addEventListener('click', () => {
+    if (checkbox.checked) {
+      const strike = document.createElement('hr')
+      strike.classList.add("strikethrough");
+      container.appendChild(strike);
+    } else {
+      
+    }
+  })
 
   const title = document.createElement('p');
   title.classList.add('task-title');
   title.textContent = taskObject.getTitle();
+  title.addEventListener('click', () => description.toggleAttribute('hidden'))
 
   const dueDate = document.createElement('p');
   dueDate.classList.add('task-date');
@@ -44,7 +55,6 @@ function displayTask(taskObject) {
   description.hidden = true;
 
   container.append(checkbox, title, dueDate, editBtn, delBtn, description)
-  container.addEventListener('click', () => description.toggleAttribute('hidden'))
 
   return container;
 };

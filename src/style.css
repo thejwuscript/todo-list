@@ -219,3 +219,9 @@ main hr {
   background-color: var(--persian-green);
   color: white;
 }
+
+.task-container .strikethrough {
+  position: absolute;
+  left: 36px;
+  width: calc(100% - 190px);
+}
