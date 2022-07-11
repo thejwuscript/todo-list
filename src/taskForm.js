@@ -74,8 +74,9 @@ function taskForm(task) {
 
   const project = document.createElement("p");
   project.style.display = "none";
-  if (document.querySelector(".sidebar span.project.active")) {
-    project.textContent = document.querySelector(".sidebar span.project.active").firstChild.textContent;
+  const node = document.querySelector(".sidebar span.project.active");
+  if (node) {
+    project.textContent = node.firstChild.textContent ||  node.childNodes[1].textContent;
   } else {
     project.textContent = "";
   }
