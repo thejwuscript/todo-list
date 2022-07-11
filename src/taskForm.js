@@ -22,6 +22,7 @@ function taskForm(task) {
 
   const dueDate = document.createElement("input");
   dueDate.type = "date";
+  dueDate.required = true;
   dueDate.id = "duedate";
   dueDate.name = "due_date";
   dueDate.min = format(new Date(), "yyyy-MM-dd");
